@@ -10,3 +10,5 @@ vectorstores/*
 *.log
 **/.files/*
 .env
+.venv/*
+.venv
