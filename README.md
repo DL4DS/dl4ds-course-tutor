@@ -1,56 +1,100 @@
-<p align="center">
-  <a href="http://docs.edubotics.ai/">
-    <img src="https://github.com/edubotics-ai/.github/blob/main/assets/images/edubot-mascot.png?raw=true" alt="edubotics-ai" width="10%" height="10%">
-  </a>
-</p>
-<p align="center">
-    <em>Edubotics AI - Empower Education with AI: Create Intelligent Chatbots Quickly and Efficiently</em>
-</p>
-<p align="center">   
-  <a href="https://github.com/edubotics-ai/edubotics-app/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/edubotics-ai/edubotics-app.svg">
-  </a>
-  <img src="https://img.shields.io/github/stars/edubotics-ai/edubotics-app.svg">
-  <a href="https://discord.com/channels/1293271626036805653">
-    <img alt="Discord" src="https://img.shields.io/discord/1293271626036805653?style=flat&logo=discord&label=Discord">
-  </a>
+---
+title: DS598 AI Tutor
+description: AI Assistant for Deep Learning for Data Science class (Spring 2025)
+emoji: 🎓
+colorFrom: red
+colorTo: green
+sdk: docker
+app_port: 7860
+---
 
-</p>
+# DS701: Tools for Data Science - Education Chatbot
 
-# Edubotics-Core Setup
+## Overview
 
-This repository is an example of how to build an application that incorporates the `edubotics-core` package. We suggest you fork this repository and
-then adapt it your application domain.
+This repository contains an LLM-based chatbot designed for the Spring 2025 iteration [DS598: Deep Learning for Data Science](https://dl4ds.github.io/sp2025/) course at Boston University. The chatbot serves as an interactive learning assistant, helping students with course-related queries, explanations of concepts, and guidance on data science tools. It is powered by [edubotics-core](https://github.com/edubotics-ai/edubotics-core) a package of modules for data loading, vector store creation and management.
 
-## Installation
+The chatbot is available on HuggingFace [here](https://dl4ds-sp25_tutor.hf.space).
 
-To install `edubotics-core`, run the following command:
+## Features
 
-```bash
-pip install edubotics-core
-```
+- 24/7 availability for student queries
+- Explanations of key data science concepts
+- Guidance on using data science tools and libraries
+- Practice problem suggestions and explanations
+- Course syllabus and schedule information
 
-## Documentation
+## Getting Started Locally
 
-For detailed instructions on the initial setup (setting up .env file, required Keys, etc), please refer to our [documentation](http://docs.edubotics.ai).
+To run the chatbot locally, follow these steps:
 
-## Templates
+1. Clone this repository
 
-To get started, check out the templates located in the `apps/` directory.
+   `git clone https://github.com/tools4ds/ds701-tutor.git`
 
-## Config Files
+2. Set up your Python environment
 
-- **config.yml**: This file controls various chatbot settings such as the default vector store and architecture type.
-- **project_config.yml**: Use this file to customize settings specific to your project.
+   a. Using venv (Python's built-in virtual environment):
 
-## Create Your Vectorstore
+   ```python
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows, use: ds701_env\Scripts\activate
+   pip install -r requirements.txt
+   ```
 
-Once you have set up your config files, you can create your vector store by running:
+   b. Using Conda:
 
-```bash
-vectorstore_creator --config_file path_to_your_config.yml --project_config_file path_to_your_project_config.yml
-```
+   ```python
+   conda create --name ds701_env python=3.9
+   conda activate ds701_env
+   conda install --file requirements.txt
+   ```
 
-## Start Your App
+Note: Make sure to use Python 3.9 or later.
 
-After creating your vector store, you can start up your app and get going!
+3. Install dependencies
+
+   `pip install edubotics-core`
+
+4. Set up environment variables. See `apps/ai_tutor/.env.example` for reference.
+
+5. Run the chatbot
+
+   ```python
+    cd apps/ai-tutor
+    python app.py
+   ```
+
+   and navigate to localhost:8000 in your browser.
+
+## Usage
+
+Students can interact with the chatbot through the web interface.
+
+Example queries:
+
+- "Explain backpropogation."
+- "What is the primary innnovation behind the Transformer?"
+- "What's the difference between supervised and unsupervised learning?"
+
+## Contributing
+
+We welcome contributions from the community to enhance the DS701 AI Tutor. Whether you're a student, instructor, or developer, your input is valuable. Here's how you can contribute:
+
+1. Fork the repository and create your feature branch.
+2. Make your changes, ensuring they align with the project's goals.
+3. Submit a pull request with a clear description of your improvements.
+
+For more detailed information on the contribution process, please refer to our `CONTRIBUTING.md` file (unavailable yet).
+
+## Privacy and Data Handling
+
+This chatbot is designed with student privacy in mind. No personal information is stored, and all interactions are anonymized. For more details, please refer to our `PRIVACY_POLICY.md`.
+
+## Support
+
+If you encounter any issues or have suggestions for improvement, please open an issue in this repository or contact the course instructor.
+
+## License
+
+This project is licensed under the MIT License - see the `LICENSE.md` file for details.
