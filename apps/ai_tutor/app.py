@@ -211,12 +211,10 @@ async def auth_google(request: Request):
 
         # add literalai user info to session store to be sent to chainlit
         literalai_user = await get_user_details(email)
-        print(f"Literalai user: {literalai_user}")
         session_store[session_token]["literalai_info"] = literalai_user.to_dict()
         session_store[session_token]["literalai_info"]["metadata"]["role"] = role
 
         user_info_json = json.dumps(session_store[session_token])
-        print(f"User info json: {user_info_json}")
         user_info_encoded = base64.b64encode(user_info_json.encode()).decode()
 
         # Set cookies
@@ -272,10 +270,10 @@ async def post_signin(request: Request):
     current_datetime = get_time()
     user_details.metadata["last_login"] = current_datetime
     # if new user, set the number of tries
+    if "role" not in user_details.metadata:
+        user_details.metadata["role"] = get_user_role(user_info["email"])
     if "tokens_left" not in user_details.metadata:
-        user_details.metadata["tokens_left"] = (
-            TOKENS_LEFT  # set the number of tokens left for the new user
-        )
+        user_details.metadata["tokens_left"] = TOKENS_LEFT
     if "last_message_time" not in user_details.metadata:
         user_details.metadata["last_message_time"] = current_datetime
     if "all_time_tokens_allocated" not in user_details.metadata:

@@ -505,7 +505,7 @@ class Chatbot:
         await self.start()
 
     @cl.header_auth_callback
-    def header_auth_callback(headers: dict) -> Optional[cl.User]:
+    async def header_auth_callback(headers: dict) -> Optional[cl.User]:
         # try: # TODO: Add try-except block after testing
         # TODO: Implement to get the user information from the headers (not the cookie)
         cookie = headers.get("cookie")  # gets back a str
@@ -521,10 +521,14 @@ class Chatbot:
         ).decode()
         decoded_user_info = json.loads(decoded_user_info)
 
+        user_id = decoded_user_info["literalai_info"]["identifier"]
+        user_info = await get_user_details(user_id)
+        metadata = user_info.metadata
+
         return cl.User(
             id=decoded_user_info["literalai_info"]["id"],
             identifier=decoded_user_info["literalai_info"]["identifier"],
-            metadata=decoded_user_info["literalai_info"]["metadata"],
+            metadata=metadata,
         )
 
     async def on_follow_up(self, action: cl.Action):
