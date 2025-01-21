@@ -211,10 +211,12 @@ async def auth_google(request: Request):
 
         # add literalai user info to session store to be sent to chainlit
         literalai_user = await get_user_details(email)
+        print(f"Literalai user: {literalai_user}")
         session_store[session_token]["literalai_info"] = literalai_user.to_dict()
         session_store[session_token]["literalai_info"]["metadata"]["role"] = role
 
         user_info_json = json.dumps(session_store[session_token])
+        print(f"User info json: {user_info_json}")
         user_info_encoded = base64.b64encode(user_info_json.encode()).decode()
 
         # Set cookies
