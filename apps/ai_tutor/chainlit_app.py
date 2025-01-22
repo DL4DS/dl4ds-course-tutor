@@ -197,7 +197,9 @@ class Chatbot:
                     id="chunking_mode",
                     label="Chunking mode",
                     values=["fixed", "semantic"],
-                    initial_index=1,
+                    initial_index=["fixed", "semantic"].index(
+                        config["splitter_options"]["chunking_mode"]
+                    ),
                 ),
                 cl.input_widget.Switch(
                     id="follow_up_questions",
